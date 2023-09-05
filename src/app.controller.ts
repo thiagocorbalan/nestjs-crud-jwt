@@ -14,7 +14,9 @@ export class AppController {
   }
 
   @Post()
-  createUser() {}
+  createUser(name: string) {
+    return this.appService.create(name);
+  }
 
   @Delete()
   deleteUser() {}

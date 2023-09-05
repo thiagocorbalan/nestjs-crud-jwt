@@ -16,8 +16,9 @@ export class AppService {
     return this.users;
   }
 
-  create(): string {
-    return 'Hello World!';
+  create(name: string) {
+    if (!name) return;
+    this.users.push(name);
   }
 
   update(): string {

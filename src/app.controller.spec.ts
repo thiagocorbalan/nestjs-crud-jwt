@@ -18,5 +18,11 @@ describe('AppController', () => {
     it('should return empty users when call getUsers', () => {
       expect(appController.getUsers()).toEqual([]);
     });
+
+    it('should return one user when call createUser', () => {
+      appController.createUser('Thiago');
+
+      expect(appController.getUsers()).toEqual(['Thiago']);
+    });
   });
 });
