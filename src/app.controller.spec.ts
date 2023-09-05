@@ -22,7 +22,11 @@ describe('AppController', () => {
     it('should return one user when call createUser', () => {
       appController.createUser('Thiago');
 
-      expect(appController.getUsers()).toEqual(['Thiago']);
+      const user = appController
+        .getUsers()
+        .find((user) => user.name === 'Thiago');
+
+      expect(user).not.toBeUndefined();
     });
   });
 });

@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
+
+type UserType = {
+  id: string;
+  name: string;
+};
 
 @Injectable()
 export class AppService {
-  private users: Array<string>;
+  private users: Array<UserType>;
 
   constructor() {
     this.users = [];
@@ -12,13 +18,13 @@ export class AppService {
     return 'Hello World!';
   }
 
-  getUsers(): Array<string> {
+  getUsers(): Array<UserType> {
     return this.users;
   }
 
   create(name: string) {
     if (!name) return;
-    this.users.push(name);
+    this.users.push({ id: randomUUID(), name });
   }
 
   update(): string {
