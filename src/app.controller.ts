@@ -6,7 +6,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get(':id')
-  getUser() {}
+  getUser(id: string) {
+    return this.appService.getUser(id);
+  }
 
   @Get('users')
   getUsers() {
@@ -19,8 +21,12 @@ export class AppController {
   }
 
   @Delete()
-  deleteUser() {}
+  deleteUser(id: string) {
+    return this.appService.delete(id);
+  }
 
   @Put()
-  updateUser() {}
+  updateUser(id: string, name: string) {
+    return this.appService.update(id, name);
+  }
 }

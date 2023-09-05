@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 describe('AppController', () => {
   let appController: AppController;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [AppService],
@@ -27,6 +27,45 @@ describe('AppController', () => {
         .find((user) => user.name === 'Thiago');
 
       expect(user).not.toBeUndefined();
+    });
+
+    it('should return user when call getUser by id', () => {
+      const user = appController
+        .getUsers()
+        .find((user) => user.name === 'Thiago');
+
+      expect(appController.getUser(user.id)).toEqual({
+        id: user.id,
+        name: 'Thiago',
+      });
+    });
+
+    it('should return user updated when call updateUser', () => {
+      const user = appController
+        .getUsers()
+        .find((user) => user.name === 'Thiago');
+
+      appController.updateUser(user.id, 'Corbalan');
+
+      const userUpdated = appController
+        .getUsers()
+        .find((user) => user.name === 'Corbalan');
+
+      expect(userUpdated).toEqual({
+        id: user.id,
+        name: 'Corbalan',
+      });
+    });
+
+    it('should return user list whitout Corbalan user when call deleteUser', () => {
+      const user = appController
+        .getUsers()
+        .find((user) => user.name === 'Corbalan');
+
+      if (user) {
+        appController.deleteUser(user.id);
+        expect(appController.getUsers()).toEqual([]);
+      }
     });
   });
 });

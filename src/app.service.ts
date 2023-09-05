@@ -14,8 +14,8 @@ export class AppService {
     this.users = [];
   }
 
-  getUser(): string {
-    return 'Hello World!';
+  getUser(id: string): UserType {
+    return this.users.find((user) => user.id === id);
   }
 
   getUsers(): Array<UserType> {
@@ -27,11 +27,17 @@ export class AppService {
     this.users.push({ id: randomUUID(), name });
   }
 
-  update(): string {
-    return 'Hello World!';
+  update(id: string, name: string) {
+    const idx = this.findIndex(id);
+
+    this.users[idx].name = name;
   }
 
-  delete(): string {
-    return 'Hello World!';
+  delete(id: string) {
+    this.users = this.users.filter((user) => user.id !== id);
+  }
+
+  private findIndex(id: string): number {
+    return this.users.findIndex((user) => user.id === id);
   }
 }
