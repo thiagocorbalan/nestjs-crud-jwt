@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-
-type UserType = {
-  id: string;
-  name: string;
-};
+import { UserType } from './type';
 
 @Injectable()
 export class AppService {
@@ -27,10 +23,12 @@ export class AppService {
     this.users.push({ id: randomUUID(), name });
   }
 
-  update(id: string, name: string) {
+  update(id: string, body: UserType) {
     const idx = this.findIndex(id);
 
-    this.users[idx].name = name;
+    if (this.users[idx]) {
+      this.users[idx].name = body.name;
+    }
   }
 
   delete(id: string) {

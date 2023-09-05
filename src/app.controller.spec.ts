@@ -45,7 +45,7 @@ describe('AppController', () => {
         .getUsers()
         .find((user) => user.name === 'Thiago');
 
-      appController.updateUser(user.id, 'Corbalan');
+      appController.updateUser(user.id, { name: 'Corbalan' });
 
       const userUpdated = appController
         .getUsers()
