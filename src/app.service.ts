@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { randomUUID } from 'crypto';
-import { PrismaService } from './prisma.service';
 import { Users } from '@prisma/client';
+import { PrismaService } from './prisma.service';
 import type { UserType } from './types';
 
 @Injectable()
@@ -12,7 +11,7 @@ export class AppService {
 		this.users = [];
 	}
 
-	getUser(id: string) {
+	getUser(id: number) {
 		return this.users.find((user) => user.id === id);
 	}
 
@@ -22,22 +21,22 @@ export class AppService {
 
 	create(name: string) {
 		if (!name) return;
-		this.users.push({ id: randomUUID(), name });
+		//this.users.push({ id: randomUUID(), name });
 	}
 
-	update(id: string, body: UserType) {
+	update(id: number, name: string) {
 		const idx = this.findIndex(id);
 
 		if (this.users[idx]) {
-			this.users[idx].name = body.name;
+			this.users[idx].name = name;
 		}
 	}
 
-	delete(id: string) {
+	delete(id: number) {
 		this.users = this.users.filter((user) => user.id !== id);
 	}
 
-	private findIndex(id: string): number {
+	private findIndex(id: number): number {
 		return this.users.findIndex((user) => user.id === id);
 	}
 }

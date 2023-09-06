@@ -11,14 +11,13 @@ import {
 	Put,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import type { UserType } from './types';
 
 @Controller()
 export class AppController {
 	constructor(private readonly appService: AppService) {}
 
 	@Get(':id')
-	getUser(@Param('id') id: string) {
+	getUser(@Param('id') id: number) {
 		if (!id) throw new BadRequestException('id not found');
 		return this.appService.getUser(id);
 	}
@@ -43,12 +42,12 @@ export class AppController {
 	}
 
 	@Delete(':id')
-	deleteUser(@Param('id') id: string) {
+	deleteUser(@Param('id') id: number) {
 		return this.appService.delete(id);
 	}
 
 	@Put(':id')
-	updateUser(@Param('id') id: string, @Body() body: UserType) {
-		return this.appService.update(id, body);
+	updateUser(@Param('id') id: number, @Body() name: string) {
+		return this.appService.update(id, name);
 	}
 }
