@@ -47,7 +47,7 @@ export class AppController {
 	}
 
 	@Put(':id')
-	updateUser(@Param('id') id: number, @Body() name: string) {
+	updateUser(@Param('id') id: number, @Body('name') name: string) {
 		return this.appService.update(id, name);
 	}
 }
