@@ -11,7 +11,7 @@ import {
 	Put,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { UserType } from './type';
+import type { UserType } from './types';
 
 @Controller()
 export class AppController {
