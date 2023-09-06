@@ -12,6 +12,16 @@ services:
       - "5433:5432"
       restart:
         always
+    api:
+      build:
+        context: .
+      image: nestjs-crud-jwt/api
+      container_name: nestjs_api
+      volumes:
+      - ./src:/app/src
+      - ./test:/app/test
+      ports:
+      - "3000:3000"
 
 volumes:
   nestjs-crud-jwt:
