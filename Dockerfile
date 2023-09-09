@@ -12,4 +12,5 @@ COPY test $APP_DIR/test
 COPY src $APP_DIR/src
 
 FROM copy as dev
+RUN npx prisma generate
 ENTRYPOINT ["npm", "run", "start:dev"]
