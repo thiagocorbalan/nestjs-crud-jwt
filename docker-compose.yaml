@@ -20,6 +20,7 @@ services:
       volumes:
       - ./src:/app/src
       - ./test:/app/test
+      - ./prisma:/app/prisma
       ports:
       - "3000:3000"
 
