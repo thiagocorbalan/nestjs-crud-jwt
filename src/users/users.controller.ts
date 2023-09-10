@@ -11,6 +11,7 @@ import {
 	Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { UsersDto } from './users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -22,14 +23,15 @@ export class UsersController {
 	}
 
 	@Get(':id')
-	getUser(@Param('id') id: number) {
+	getUser(@Param('id') id: string) {
 		if (!id) throw new BadRequestException('id not found');
-		return this.usersService.getUser(id);
+
+		return this.usersService.getUserById(parseInt(id));
 	}
 
 	@Post()
-	createUser(@Body('name') name: string) {
-		if (!name) {
+	createUser(@Body() data: UsersDto) {
+		if (!data) {
 			throw new HttpException(
 				{
 					message: 'body is required',
@@ -38,7 +40,7 @@ export class UsersController {
 				HttpStatus.BAD_REQUEST,
 			);
 		}
-		return this.usersService.create(name);
+		return this.usersService.create(data);
 	}
 
 	@Delete(':id')
